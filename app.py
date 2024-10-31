@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_cors import CORS
@@ -40,6 +40,11 @@ class TeamStats(db.Model):
     team2_name = db.Column(db.String(80), nullable=False)
     team2_wins = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
+@app.route('/')
+def base():
+    return render_template('index.html')
 
 # Routes
 @app.route('/register', methods=['POST'])
